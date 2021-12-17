@@ -36,6 +36,12 @@
                                 <div class="alert alert-danger" role="alert"><%- item %></div>
                             <% }); %>
                         <% } %>
+
+                        <% if(success != "") { %>
+                            <% success.forEach((item) => { %>
+                                <div class="alert alert-success" role="alert"><%- item %></div>
+                            <% }); %>
+                        <% } %>
                         <!-- Form -->
                         <form class="mb-6" method="post" action="/register">
 

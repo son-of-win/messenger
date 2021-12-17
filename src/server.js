@@ -1,7 +1,6 @@
 require('dotenv').config()
 let express = require("express");
 let connectDB = require('./config/connectDB.js');
-let ContactModel = require('./models/contact.model.js');
 let configViewEngine = require('./config/viewEngine.js');
 let connectFlash = require('connect-flash');
 let configSession = require('./config/session.js');

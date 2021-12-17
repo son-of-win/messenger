@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+let mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
     username: String,
-    gender: {type: String, default: 'male'},
+    // gender: {type: String, default: 'male'},
     phone: {type: Number, default:null},
     address: {type: String, default:null},
     avatar: {type: String, default: "avatar-default.jpg"},
@@ -30,5 +30,15 @@ let UserSchema = new Schema({
     deletedAt: {type: Number, default: null},
 });
 
+// trong statics viết các function thao tác với bảng contact
+UserSchema.statics = {
+    createNew(item) {
+        return this.create(item);
+    },
+
+    existUser(username) {
+        return this.findOne({"username": username}).exec();
+    }
+};
 // tên bảng là user
 module.exports = mongoose.model("user",UserSchema); 
