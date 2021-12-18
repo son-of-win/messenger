@@ -13,7 +13,9 @@ let initRoutes = (app) => {
     router.post('/login', AuthController.postLogin);
     router.get('/register', AuthController.getSignUp);
     router.post('/register',AuthValidation.register, AuthController.postSignUp);
+    router.get('/verify/:token', AuthController.verifyAccount);
     router.get('/',HomeController.getHome);
+    
 
     return app.use('/', router);
 };
