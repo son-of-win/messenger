@@ -38,6 +38,21 @@ UserSchema.statics = {
 
     existUser(username) {
         return this.findOne({"username": username}).exec();
+    },
+
+    removeUserById(id) {
+        return this.findByIdAndRemove(id).exec();
+    },
+
+    verify(token) {
+        return this.findOneAndUpdate(
+            {"local.verifyToken": token},
+            {"local.isActive": true, "local.verifyToken": null}
+        ).exec();
+    },
+
+    findUserByToken(token) {
+        return this.findOne({"local.verifyToken": token}).exec();
     }
 };
 // tên bảng là user
