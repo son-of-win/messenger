@@ -3,14 +3,14 @@ let connectMongo = require("connect-mongodb-session")(session);
 
 // let MongoStore = new connectMongo(session);
 
-//noi luu session
+//định nghĩa nơi lưu session
 /**
- * This variable is where save session, in this case is mongodb
+ * biến này chỉ định nơi sẽ lưu trữ session, trong trường hợp này sẽ lưu trong csdl mongodb
  */
 let sessionStore = new connectMongo({
     uri: `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
     // autoReconnect: true,
-    autoRemove: "native",  // khi cookie het han tu dong xoa trong db
+    autoRemove: "native",  //khi cookie hết hạn sẽ tự động xoá trong db
     collection: 'mySession'
 });
 /**

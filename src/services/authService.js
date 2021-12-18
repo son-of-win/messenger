@@ -29,7 +29,7 @@ let register = (username, email , password, protocol, host) => {
             }
         };
         
-        // vi userModel return mot promise
+        // UserMode.createNew return a Promise
         let user = await UserModel.createNew(userItem);
         let linkVerify = `${protocol}://${host}/verify/${user.local.verifyToken}`; // verifytoken được gen từ uuidv4
         //send mail confirm

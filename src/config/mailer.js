@@ -23,7 +23,7 @@ let SendMail = (to, subject, htmlContent) => {
         html: htmlContent
     };
 
-    return transporter.sendMail(options)  //This default return a Promise
+    return transporter.sendMail(options)  //mặc định trả về một Promise
 };
 
 module.exports = {

@@ -6,14 +6,14 @@ let localStrategy = passportLocal.Strategy;
 
 // funtion initilize passport local
 /**
- * valid user account type: local
+ * xác định xem tài khoản có thuộc loại local 
  */
 
 let InitPassportLocal = () => {
     passport.use(new localStrategy({
-        usernameField: "username",  // lay thong tin tu form request
+        usernameField: "username",  // lấy thông tin từ form request
         passwordField: "password",
-        passReqToCallback: true  // sau khi xac thuc se gui request ve callback function
+        passReqToCallback: true  // sau khi xác thực sẽ gửi request về callback function
     }, async (req, username, password, done) => {
         try {
             // check user
@@ -48,7 +48,7 @@ let InitPassportLocal = () => {
     });
 
     /**
-     * Passport session in server.js call passport deserializeUser, get session was saved
+     * Passport.session trong file server.js gọi đến phương thức passport.deserializeUser để lấy thông tin của session được lưu trong db
      */
 
     passport.deserializeUser((id, done) => {
