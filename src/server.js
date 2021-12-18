@@ -5,6 +5,7 @@ let configViewEngine = require('./config/viewEngine.js');
 let connectFlash = require('connect-flash');
 let configSession = require('./config/session.js');
 let initRoutes  = require('./routes/router.js');
+let passport = require('passport');
 
 // Init app
 let app = express();
@@ -24,6 +25,10 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 // enable connect-flash for show message to user
 app.use(connectFlash());
+
+// Config passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // init all routes
 initRoutes(app)

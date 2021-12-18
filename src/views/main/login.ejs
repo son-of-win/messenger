@@ -32,18 +32,29 @@
                         <!-- Text -->
                         <p class="text-center mb-6">Welcome to the official Chat web-client.</p>
 
+                        <!-- alert -->
+                        <% if(errors != "") { %>
+                            <% errors.forEach((item) => { %>
+                                <div class="alert alert-danger" role="alert"><%- item %></div>
+                            <% }); %>
+                        <% } %>
+                        <% if(success != "") { %>
+                            <% success.forEach((item) => { %>
+                                <div class="alert alert-success" role="alert"><%- item %></div>
+                            <% }); %>
+                        <% } %>
                         <!-- Form -->
                         <form class="mb-6" method="post" action="/login">
                             <!-- Email -->
                             <div class="form-group">
-                                <label for="email" class="sr-only">Email Address</label>
-                                <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter your email">
+                                <label for="username" class="sr-only">Username</label>
+                                <input type="username" class="form-control form-control-lg" id="username"  name="username" placeholder="Enter your username">
                             </div>
 
                             <!-- Password -->
                             <div class="form-group">
                                 <label for="password" class="sr-only">Password</label>
-                                <input type="password" class="form-control form-control-lg" id="password" placeholder="Enter your password">
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password">
                             </div>
 
                             <div class="form-group d-flex justify-content-between">

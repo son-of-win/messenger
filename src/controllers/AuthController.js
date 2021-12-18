@@ -1,13 +1,13 @@
 const {validationResult} = require("express-validator");
-const {authErrors, transMail} = require("../../lang/vi.js");
+const {authErrors, transMail, authSuccess} = require("../../lang/vi.js");
 let {AuthService} = require("./../services/index.js");
 let getLogin = (req, res) => {
-    return res.render('main/login')
+    return res.render('main/login', {
+        errors: req.flash("errors"),
+        success: req.flash("success")
+    });
 };
 
-let postLogin = (req, res) => {
-    console.log(req.body);
-}
 let getSignUp = (req, res) => {
     return res.render('main/signup', {
         errors: req.flash("errors"),
@@ -57,10 +57,41 @@ let postSignUp = async (req, res) => {
     
 };
 
+let getLogOut = (req, res) => {
+    req.logout(); // remove passport user save in session
+    req.flash("success", authSuccess.logoutSuccess);
+    return res.redirect('/login');
+}
+
+let checkLoggedIn = (req, res, next) => {
+    /**
+     * nếu đã login  => được redirect sang home page
+     * nếu chưa login => quay về trang login
+     */
+    if(!req.isAuthenticated()) {
+        return res.redirect('/login');
+    }
+
+    next();
+}
+
+
+let checkLoggedOut = (req, res, next) => {
+    /**
+     * nếu đã login  => được redirect sang home page
+     * nếu chưa login => quay về trang login
+     */
+    if(req.isAuthenticated()) {
+        return res.redirect('/');
+    }
+    next();
+}
 module.exports = {
     getLogin: getLogin,
-    postLogin: postLogin,
     getSignUp: getSignUp,
+    getLogOut: getLogOut,
     postSignUp: postSignUp,
-    verifyAccount: verifyAccount
+    verifyAccount: verifyAccount,
+    checkLoggedIn: checkLoggedIn,
+    checkLoggedOut: checkLoggedOut
 };
