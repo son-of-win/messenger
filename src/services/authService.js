@@ -47,6 +47,9 @@ let register = (username, email , password, protocol, host) => {
     });
 };
 
+let login = (username, password) => {
+    
+}
 let verifyToken = (token) => {
     return new Promise( async (resolve, reject) => {
         let existToken = await UserModel.findUserByToken(token);

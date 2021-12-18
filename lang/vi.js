@@ -7,13 +7,19 @@ const TransValidation = {
 const AuthErrors = {
     account_in_use: "This username existed, use another plz!!!!",
     account_not_active:"Account is created but not actived, please check mail to active",
-    account_remove: "Account had been deleted!"
+    account_remove: "Account had been deleted!",
+    login_failed: "Username or password is wrong!!!",
+    server_error: "Error in server, try login later or contact to admin"
 }
 
 const AuthSuccess = {
     userCreated: (username) =>{
         return `Your account with username: <strong>${username}</strong> is created, check your mail to active your account`;
-    }
+    },
+    loginSuccess: (username) => {
+        return `Xin chào ${username}`;
+    },
+    logoutSuccess: "Log out success, see you again"
 };
 
 const TransMail = {

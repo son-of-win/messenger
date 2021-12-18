@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-
+let bcrypt = require("bcrypt");
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
@@ -53,7 +53,24 @@ UserSchema.statics = {
 
     findUserByToken(token) {
         return this.findOne({"local.verifyToken": token}).exec();
+    },
+
+    findUserById(id) {
+        return  this.findById(id).exec();
     }
 };
+
+UserSchema.methods = {
+    comparePassword(password) {
+        //return a Promise boolean
+        return bcrypt.compare(password, this.local.password); 
+    }
+
+}
+/**
+ * Statics chỉ nằm ở phạm vi schema để tìm các bản ghi
+ * Sau khi tìm ra các bản ghi => các funtion trong method sẽ sử dụng các bản ghi đó
+ */
+
 // tên bảng là user
 module.exports = mongoose.model("user",UserSchema); 
